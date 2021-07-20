@@ -1,0 +1,24 @@
+.cartButton {
+cursor: pointer;
+border-radius: 15px;
+display: flex;
+justify-content: space-around;
+align-items: center;
+font-size: medium;
+font-weight: bolder;
+padding: 0.75rem 3rem;
+margin-right: 0rem;
+}
+
+.icon {
+    width: 1.35rem;
+    height: 1.35rem;
+    margin-right: 0.5rem;
+  }
+  .badge {
+    background-color: #07143b;
+    border-radius: 47%;
+    padding: 0.4rem 1rem;
+    margin-left: 1rem;
+    color: whitesmoke;
+  }
