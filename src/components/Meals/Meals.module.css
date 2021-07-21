@@ -1,7 +1,40 @@
-.meals {
-    margin: auto;
-    top: 50rem;
+.mealsWindow {
+    top: 60rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+    align-items: center;
+    margin-top: 2rem;
     background-color: yellowgreen;
-    border: tomato;
-    border-style: solid 2px ;
+    height: 20rem;
+    width: 55rem;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    padding-top: 0rem;
+    padding-bottom: 1.3rem;
+}
+.meals {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    width: 50rem;
+    height: 4.5rem;
+    border-bottom: 2px solid gray;
+    border-style: solid 2px;
+    line-height: 1.5rem;
+    padding-bottom: 1rem;
+
+
+}
+.mealsName {
+    font-weight: bold;
+}
+.mealsDescriptione {
+    font-style: italic;
+}
+.mealsPrice {
+    padding-top: 0.5rem;
+    font-weight: bold;
+    color: rgb(194, 5, 5)
 }

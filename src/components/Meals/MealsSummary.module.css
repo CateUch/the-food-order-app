@@ -1,0 +1,7 @@
+.mealsSummary {
+    background-color: gray;
+    background-color: transparent;
+    justify-content: center;
+    display: flex;
+    top: 30rem;
+}
