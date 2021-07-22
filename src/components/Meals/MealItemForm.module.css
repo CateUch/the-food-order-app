@@ -1,0 +1,25 @@
+.form input {
+    width: 3rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: inherit;
+}
+
+.form label {
+    /* font-style: italic; */
+    font-weight: bolder;
+    color: #07143b;
+
+}
+
+.form button {
+    color: cornsilk;
+    font-size: inherit;
+    background-color: maroon;
+    width: 4rem;
+    height: 2rem;
+    border-radius: 5px;
+    border: 1px solid #07143b;
+    box-shadow: 1px 1px 1px #07143b;
+    margin-top: 0.5rem;
+}

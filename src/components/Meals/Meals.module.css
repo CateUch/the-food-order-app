@@ -15,13 +15,13 @@
     padding-bottom: 1.3rem;
 }
 .meals {
-    display: flex;
+    /* flex: 0 0 65%; */
+    /* display: flex; */
     flex-direction: column;
     text-align: start;
     width: 50rem;
     height: 4.5rem;
-    border-bottom: 2px solid gray;
-    border-style: solid 2px;
+
     line-height: 1.5rem;
     padding-bottom: 1rem;
 
@@ -37,4 +37,16 @@
     padding-top: 0.5rem;
     font-weight: bold;
     color: rgb(194, 5, 5)
+}
+.mealForm {
+    float: right;
+    flex: 1;
+    align-items: flex-end;
+    text-align: end;
+}
+
+.mealSection {
+    display: block;
+    border-bottom: 2px solid gray;
+    border-style: solid 2px;
 }

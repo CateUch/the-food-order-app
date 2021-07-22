@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import style from './Meals.module.css';
 import MealsSummary from './MealsSummary';
-
+import MealItemForm from './/MealItemForm';
 
 
 function Meals() {
@@ -29,23 +29,33 @@ function Meals() {
     console.log(listOfMeals)
 
     return (
-<>
-<MealsSummary />
-    <div className={style.mealsWindow}>
-            {listOfMeals.map(item => {
-                return (
-                    <div className={style.meals}>
-                        <span className={style.mealsName}>{item.name}</span>
-                        <span className={style.mealsDescriptione}>{item.description}</span>
-                        <span className={style.mealsPrice}>{item.price}</span>
-                    </div>
-                )
-            }
-            )}
-            </div>
-</>
+        <>
+            <MealsSummary />
+            <li className={style.mealsWindow}>
+                {listOfMeals.map(item => {
+                    return (
+                        <div className={style.mealSection}>
+                            <div className={style.mealForm}><MealItemForm /></div>
+                            <div className={style.meals}>
+                                <div className={style.mealsName}>{item.name}</div>
+                                <div className={style.mealsDescriptione}>{item.description}</div>
+                                <div className={style.mealsPrice}>{item.price}</div>
 
+                            </div>
+
+                        </div>
+                    )
+                }
+
+                )}
+
+
+
+
+            </li>
+        </>
     )
+
 }
 
 export default Meals;
