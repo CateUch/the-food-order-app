@@ -1,0 +1,24 @@
+.meals {
+    /* flex: 0 0 65%; */
+    /* display: flex; */
+    flex-direction: column;
+    text-align: start;
+    width: 50rem;
+    height: 4.5rem;
+
+    line-height: 1.5rem;
+    padding-bottom: 1rem;
+
+
+}
+.mealsName {
+    font-weight: bold;
+}
+.mealsDescriptione {
+    font-style: italic;
+}
+.mealsPrice {
+    padding-top: 0.5rem;
+    font-weight: bold;
+    color: rgb(194, 5, 5)
+    }

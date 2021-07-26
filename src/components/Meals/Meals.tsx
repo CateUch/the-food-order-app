@@ -1,11 +1,14 @@
-//@ts-nocheck
+
 import React, { useState } from 'react';
 import style from './Meals.module.css';
 import MealsSummary from './MealsSummary';
 import MealItemForm from './/MealItemForm';
+import MealItem from './MealItem';
 
 
 function Meals() {
+
+    // const itemPrice = `$${props.price.toFixed(2)}`;
 
     const [listOfMeals, setListOfMeals] = useState([
         {
@@ -31,28 +34,18 @@ function Meals() {
     return (
         <>
             <MealsSummary />
-            <li className={style.mealsWindow}>
-                {listOfMeals.map(item => {
-                    return (
-                        <div className={style.mealSection}>
-                            <div className={style.mealForm}><MealItemForm /></div>
-                            <div className={style.meals}>
-                                <div className={style.mealsName}>{item.name}</div>
-                                <div className={style.mealsDescriptione}>{item.description}</div>
-                                <div className={style.mealsPrice}>{item.price}</div>
-
+            <div className={style.mealsWindow}>
+                <ul >
+                    {listOfMeals.map(item => {
+                        return (
+                            <div className={style.mealSection}>
+                                <MealItemForm />
+                                <MealItem item={item} />
                             </div>
-
-                        </div>
-                    )
-                }
-
-                )}
-
-
-
-
-            </li>
+                        )}
+                    )}
+                </ul>
+            </div>
         </>
     )
 

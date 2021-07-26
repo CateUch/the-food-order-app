@@ -10,7 +10,9 @@ function App() {
       <header className="App-header">
         <Header />
       </header>
+      <main>
       <Meals />
+      </main>
     </div>
   );
 }

@@ -11,8 +11,15 @@
     color: #07143b;
 
 }
+.form {
+    float: right;
+    flex: 1;
+    align-items: flex-end;
+    text-align: end;
+}
 
 .form button {
+    cursor: pointer;
     color: cornsilk;
     font-size: inherit;
     background-color: maroon;
