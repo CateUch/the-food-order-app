@@ -6,9 +6,9 @@ const MealItemForm = () => {
         <div className={style.form}>
         {/* <div className={style.form}> */}
         <label htmlFor="amount">Amount </label>
-        <input type="text" value='6' name='amount'/>
+        <input type="number" name='amount'/>
         <div >
-        <button >+ Add </button>
+        <button >Add to cart </button>
         </div>
         {/* </div> */}
         </div>
