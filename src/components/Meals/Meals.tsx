@@ -1,10 +1,12 @@
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import style from './Meals.module.css';
 import MealsSummary from './MealsSummary';
 import MealItemForm from './/MealItemForm';
 import MealItem from './MealItem';
 import {v1} from 'uuid'
+import CartContext from '../../store/cart-context';
+import { isTemplateTail } from 'typescript';
 
 
 function Meals() {
@@ -35,6 +37,13 @@ function Meals() {
     ]);
     console.log(listOfMeals)
 
+    const [itemAmount, setItemAmount] = useState(0)
+
+    function addToCartHandler(amount: number) {
+        setItemAmount(amount)
+    }
+
+
     return (
         <>
             <MealsSummary />
@@ -43,8 +52,8 @@ function Meals() {
                     {listOfMeals.map(item => {
                         return (
                             <div className={style.mealSection}>
-                                <MealItemForm />
-                                <MealItem item={item} />
+                                <MealItemForm onAddToCart={addToCartHandler}/>
+                                <MealItem item={item} itemAmount={itemAmount}/>
                             </div>
                         )}
                     )}

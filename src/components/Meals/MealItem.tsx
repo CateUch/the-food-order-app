@@ -1,15 +1,32 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import CartContext from '../../store/cart-context';
 import style from './MealItem.module.css'
 
-type PropsType = {
-    item: {
+type ItemType = {
+    id: string,
         name: string,
-        description: string,
-        price: string
-    }
+        price: string,
+        description: string
+}
+
+type PropsType = {
+    itemAmount: number,
+    item: ItemType
 }
 
 const MealItem = (props: PropsType) => {
+
+    const cartCtx = useContext(CartContext);
+
+    const addToCart = (itemAmount: number) => {
+        cartCtx.addItem ({
+            id: props.item.id,
+            name: props.item.name,
+            amount: itemAmount,
+            price: props.item.price
+        })
+    }
+
     return (
         <div className={style.meals}>
             <div className={style.mealsName}>{props.item.name}</div>

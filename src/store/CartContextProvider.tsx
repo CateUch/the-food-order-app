@@ -5,8 +5,19 @@ const defaultCart = {
     items: [],
     totalAmount: 0
 }
-
+//@ts-ignore
 const cartReducer = (state, action) => {
+    if (action.type === 'ADD_ITEM') {
+        const updatedItems = state.items.concat(action.item);
+        const newTotalAmout = state.totalAmount + action.item.price * action.item.amount;
+        return {
+            items: updatedItems,
+            totalAmount: newTotalAmout
+        }
+    }
+    if (action.type === 'REMOVE_ITEM') {
+
+    }
     return defaultCart
 }
 
@@ -14,12 +25,12 @@ const CartContextProvider = (props: { children: React.ReactNode }) => {
 
     const [cartState, dispatchCart] = useReducer(cartReducer, defaultCart);
 
-    function addItemToCartHandler (item: []) {
-
+    function addItemToCartHandler(item: []) {
+        dispatchCart({ type: 'ADD_ITEM', item: item })
     }
 
-    function removeItemFromCart (id: string) {
-
+    function removeItemFromCart(id: string) {
+        dispatchCart({ type: 'ADD_ITEM', id: id })
     }
     const cartContext = {
         items: cartState.items,
