@@ -4,6 +4,7 @@
     flex: 1;
     align-items: flex-end;
     text-align: end;
+    margin-top: -5rem;
 }
 
 .form button {

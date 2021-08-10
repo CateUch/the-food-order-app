@@ -1,9 +1,12 @@
-import React, { FormEvent, Ref, useRef, useState } from 'react';
+import React, { FormEvent, Ref, useContext, useRef, useState } from 'react';
+import CartContext from '../../store/cart-context';
 import Input from '../UI/Input/Input';
 import style from './MealItemForm.module.css';
 
 type PropsType = {
-    onAddToCart: (e: number) => void,
+
+    onAddItemAmount: (e: number) => void,
+
 }
 
 const MealItemForm = (props: PropsType) => {
@@ -12,7 +15,7 @@ const MealItemForm = (props: PropsType) => {
 
     const amountInputRef = useRef<HTMLInputElement | null>(null);
 
-    const onSubmitHandler = (event: FormEvent<HTMLFormElement>) => {
+    const submitHandler = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         if (amountInputRef && amountInputRef.current) {
@@ -25,12 +28,12 @@ const MealItemForm = (props: PropsType) => {
                     setAmountIsValid(false)
                 return;
             }
-            props.onAddToCart(enteredAmountNumber);
+            props.onAddItemAmount(enteredAmountNumber);
+
         }
     }
-
     return (
-        <form className={style.form} onSubmit={onSubmitHandler}>
+        <form className={style.form} onSubmit={submitHandler}>
             <Input label='Amount'
                 ref={amountInputRef}
                 input={{
