@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import CartContext from '../../store/cart-context';
+import { ItemCtxType } from '../../store/CartContextProvider';
 import Modal from '../UI/Modal';
 import style from './Cart.module.css';
 import CartItem from './CartItem';
@@ -12,33 +13,36 @@ const Cart = (props: PropsType) => {
   const context = useContext(CartContext);
 
 
-  const totalAmount = context.totalAmount;
+  const totalAmount = `$${context.totalAmount.toFixed(2)}`;
   const hasItems = context.items.length > 0;
 
-  const cartItemRemoveHandler = (id: string) => {
+  console.log(context.items);
+  console.log(context.items[0])
 
+  const cartItemRemoveHandler = (id: string) => {
+    context.removeItem(id)
   }
 
-  const cartItemAddHandler = (item: any) => {
-
+  const cartItemAddHandler = (item: ItemCtxType) => {
+    context.addItem({ ...item, amount: 1 })
   }
 
   const cartItems = (
     <ul className={style.cartItems}>
-      {context.items.map((item) => {
+      {context.items.map((item) => (
         <CartItem
           key={item.id}
           name={item.name}
           price={item.price}
           amount={item.amount}
-          onRemove={ cartItemRemoveHandler.bind(null, item.id)}
-          onAdd={ cartItemAddHandler.bind(null, item)}
-
+          onRemove={cartItemRemoveHandler.bind(null, item.id)}
+          onAdd={cartItemAddHandler.bind(null, item)}
         />
-      })}
+        )
+      )}
     </ul>
   );
-
+debugger
   return (
     <Modal onClose={props.onClose}>
       {cartItems}

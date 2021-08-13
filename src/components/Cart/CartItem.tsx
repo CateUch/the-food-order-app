@@ -2,6 +2,7 @@ import React from 'react';
 import style from './CartItem.module.css'
 
  const CartItem = (props: PropsType) => {
+
     const price = `$${props.price.toFixed(2)}`;
 
     return (

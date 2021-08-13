@@ -3,50 +3,44 @@ import CartContext from '../../store/cart-context';
 import style from './MealItem.module.css'
 import MealItemForm from './MealItemForm';
 
-type ItemType = {
-    id: string,
-        name: string,
-        price: number,
-        description: string
-}
-
-type PropsType = {
-    // onAddAmount: (e: number) => void,
-    // itemAmount: number,
-    item: ItemType
-}
-
-
 const MealItem = (props: PropsType) => {
 
-    // const [itemAmount, setItemAmount] = useState(0)
-
-    // function onAddItemAmount(amount: number) {
-    //     setItemAmount(amount)
-    // }
-
     const context = useContext(CartContext);
-    const onAddItemToCartHandler = (amount: number,
-        ) => {
+
+    const addItemToCartHandler = (amount: number) => {
         context.addItem({
-          id: props.item.id,
-          name: props.item.name,
-          amount:amount,
-          price: props.item.price,
+            id: props.item.id,
+            name: props.item.name,
+            amount: amount,
+            price: props.item.price,
+            defaultValue: '0',
+            toDefault: false
         });
-      };
+    };
 
     return (
         <>
-        <div className={style.meals}>
-            <div className={style.mealsName}>{props.item.name}</div>
-            <div className={style.mealsDescriptione}>{props.item.description}</div>
-            <div className={style.mealsPrice}>{props.item.price}</div>
-            <MealItemForm  onAddItemAmount={onAddItemToCartHandler}/>
-        </div>
-
-        </>
-    )
-}
+            <li className={style.meals}>
+                <div className={style.mealsName}>{props.item.name}</div>
+                <div className={style.mealsDescriptione}>{props.item.description}</div>
+                <div className={style.mealsPrice}>{props.item.price}</div>
+                <MealItemForm id={props.item.id} onAddItemAmount={addItemToCartHandler} />
+            </li>
+            </>
+    );
+};
 
 export default MealItem;
+
+
+//types
+type ItemType = {
+    id: string,
+    name: string,
+    price: number,
+    description: string
+}
+
+type PropsType = {
+    item: ItemType
+}

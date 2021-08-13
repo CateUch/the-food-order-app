@@ -1,24 +1,39 @@
 
-import React, {useContext} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import CartIcon from '../../Cart/CartIcon';
 import style from './HeaderCartButton.module.css';
 import CartContext from '../../../store/cart-context';
 
-type PropsType = {
-    onShowCart: () => void,
-}
-
 function HeaderCartButton(props: PropsType) {
-const context = useContext(CartContext);
 
+    const [btnHighLighted, setBtnHighLighted] = useState(false)
+    const context = useContext(CartContext);
 
-const numberOfCartItems = context.items.reduce((curNum, item) => {
-    //@ts-ignore
-    return curNum + item.amount
-}, 0)
+    const numberOfCartItems = context.items.reduce((curNum, item) => {
+        return curNum + item.amount
+    }, 0);
+
+    const { items } = context;
+
+    const btnStyles = `${style.cartButton} ${btnHighLighted ? style.bump : ''}`;
+
+    useEffect(() => {
+        if (items.length === 0) {
+            return;
+        }
+        setBtnHighLighted(true);
+        const timer = setTimeout(() => {
+            setBtnHighLighted(false);
+        }, 300);
+
+        return (() => {
+            clearTimeout(timer)
+        })
+
+    }, [items])
 
     return (
-        <button className={style.cartButton} onClick={props.onShowCart}>
+                <button className={btnStyles} onClick= {props.onShowCart}>
             <span className={style.icon}>
                 <CartIcon />
             </span>
@@ -26,7 +41,12 @@ const numberOfCartItems = context.items.reduce((curNum, item) => {
             <span className={style.badge}> {numberOfCartItems} </span>
         </button>
 
-    )
-}
+    );
+};
 
 export default HeaderCartButton;
+
+//types
+type PropsType = {
+    onShowCart: () => void,
+}

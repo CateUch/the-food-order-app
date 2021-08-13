@@ -1,39 +1,33 @@
 
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import style from './Meals.module.css';
 import MealsSummary from './MealsSummary';
-import MealItemForm from './MealItemForm';
 import MealItem from './MealItem';
-import {v1} from 'uuid'
+import { v1 } from 'uuid'
 
 
 function Meals() {
 
-    // const itemPrice = `$${props.price.toFixed(2)}`;
-
-    const [listOfMeals, setListOfMeals] = useState([
+    const listOfMeals = [
         {
-            id: v1(),
+            id: 'm1',
             name: 'Sushi',
             description: 'Finest fish and Veggies',
             price: 22.99
         },
-
         {
-            id: v1(),
+            id: 'm2',
             name: 'Green Bowl',
             description: 'Healthy...and green...',
             price: 18.99
         },
-
         {
-            id: v1(),
+            id: 'm3',
             name: 'Schnitzel',
             description: 'A german speciality',
             price: 16.99
         }
-    ]);
-    console.log(listOfMeals)
+    ];
 
     return (
         <>
@@ -42,10 +36,11 @@ function Meals() {
                 <ul >
                     {listOfMeals.map(item => {
                         return (
-                            <div className={style.mealSection}>
-                                <MealItem item={item}  />
+                            <div className={style.mealSection} key={item.id}>
+                                <MealItem item={item} />
                             </div>
-                        )}
+                        )
+                    }
                     )}
                 </ul>
             </div>
@@ -60,7 +55,8 @@ export default Meals;
 
 export type ItemType = {
     id: string,
-        name: string,
-        price: number,
-        description: string
+    name: string,
+    price: number,
+    description: string
 }
+
