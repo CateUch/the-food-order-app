@@ -12,12 +12,8 @@ type PropsType = {
 const Cart = (props: PropsType) => {
   const context = useContext(CartContext);
 
-
   const totalAmount = `$${context.totalAmount.toFixed(2)}`;
   const hasItems = context.items.length > 0;
-
-  console.log(context.items);
-  console.log(context.items[0])
 
   const cartItemRemoveHandler = (id: string) => {
     context.removeItem(id)

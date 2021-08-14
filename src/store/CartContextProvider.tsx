@@ -56,8 +56,6 @@ const CartContextProvider = (props: { children: React.ReactNode }) => {
 
     const [cartState, dispatchCart] = useReducer(cartReducer, defaultCart);
 
-    const fetching = useContext(CartContext)
-
     const addItemToCartHandler = (item: ItemCtxType) => {
         dispatchCart({ type: 'ADD_ITEM', item: item })
     }
@@ -71,7 +69,6 @@ const CartContextProvider = (props: { children: React.ReactNode }) => {
         addItem: addItemToCartHandler,
         removeItem: removeItemFromCart,
         defaultValue: '0',
-        toDefault: fetching.toDefault
     }
 
     return (
@@ -91,7 +88,6 @@ export type ItemCtxType = {
     price: number,
     amount: number,
     defaultValue: string,
-    toDefault: boolean
 }
 
 type DefaultStateType = {

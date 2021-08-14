@@ -7,7 +7,6 @@ const MealItemForm = (props: PropsType) => {
 
     const [amountIsValid, setAmountIsValid] = useState(true);
     const amountInputRef = useRef<HTMLInputElement | null>(null);
-    const [inputValue, setInputValue] = useState('1')
 
     const submitHandler = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -23,18 +22,11 @@ const MealItemForm = (props: PropsType) => {
                 return;
             }
             props.onAddItemAmount(enteredAmountNumber);
-            setInputValue('0')
         };
 
     };
 
 const ctx = useContext(CartContext)
-
-    useEffect(()=> {
-
-        },[ctx.toDefault])
-
-
 
     return (
         <form className={style.form} onSubmit={submitHandler}>

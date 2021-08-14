@@ -7,7 +7,6 @@ const CartContext = React.createContext<CartContextType>({
     totalAmount: 0,
     removeItem: (id: string) => { },
     addItem: (item: ItemCtxType) => { },
-    toDefault: true
 })
 
 export default CartContext;
@@ -19,5 +18,4 @@ export type CartContextType = {
     totalAmount: number,
     removeItem: (id: string) => void,
     addItem: (item: ItemCtxType) => void,
-    toDefault: boolean
 }

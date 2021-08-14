@@ -14,7 +14,6 @@ const MealItem = (props: PropsType) => {
             amount: amount,
             price: props.item.price,
             defaultValue: '0',
-            toDefault: false
         });
     };
 
