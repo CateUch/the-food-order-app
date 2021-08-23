@@ -1,33 +1,33 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import style from './Meals.module.css';
 import MealsSummary from './MealsSummary';
 import MealItem from './MealItem';
-import { v1 } from 'uuid'
-
 
 function Meals() {
 
-    const listOfMeals = [
-        {
-            id: 'm1',
-            name: 'Sushi',
-            description: 'Finest fish and Veggies',
-            price: 22.99
-        },
-        {
-            id: 'm2',
-            name: 'Green Bowl',
-            description: 'Healthy...and green...',
-            price: 18.99
-        },
-        {
-            id: 'm3',
-            name: 'Schnitzel',
-            description: 'A german speciality',
-            price: 16.99
+    const [listOfMeals, setListOfMeals] = useState<ListOfMealsType>([]);
+
+    useEffect(() => {
+        const mealsAPI = async () => {
+            const response = await fetch('https://the-food-order-app-a37b2-default-rtdb.firebaseio.com/meals.json');
+            const responseData = await response.json();
+            const mealsArray = [];
+
+            for (const key in responseData) {
+                mealsArray.push({
+                    id: key,
+                    name: responseData[key].name,
+                    description: responseData[key].description,
+                    price: responseData[key].price,
+                })
+            };
+
+            setListOfMeals(mealsArray)
+
         }
-    ];
+        mealsAPI()
+    }, [])
 
     return (
         <>
@@ -53,10 +53,12 @@ export default Meals;
 
 //types
 
-export type ItemType = {
+export type MealItemType = {
     id: string,
     name: string,
+    description: string,
     price: number,
-    description: string
 }
+
+export type ListOfMealsType = Array<MealItemType>
 

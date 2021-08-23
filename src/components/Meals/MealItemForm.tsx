@@ -40,7 +40,7 @@ const ctx = useContext(CartContext)
                     step: '1',
                     defaultValue: '0',
                 }} />
-                {/* {!amountIsValid && <p>Please enter a valid amount (1-5).</p>} */}
+                {!amountIsValid && <p>Please enter a valid amount (1-5).</p>}
             <button >Add to cart </button>
 
         </form>

@@ -6,7 +6,7 @@
     align-items: center;
     margin-top: 2rem;
     background-color: yellowgreen;
-    height: 20rem;
+    min-height: 20rem;
     width: 55rem;
     margin-left: auto;
     margin-right: auto;
@@ -21,5 +21,5 @@
 .mealSection {
     display: block;
     border-bottom: 2px solid gray;
-    border-style: solid 2px;
+
 }

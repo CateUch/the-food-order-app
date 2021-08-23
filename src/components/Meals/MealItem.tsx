@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import CartContext from '../../store/cart-context';
 import style from './MealItem.module.css'
 import MealItemForm from './MealItemForm';
+import { MealItemType } from './Meals';
 
 const MealItem = (props: PropsType) => {
 
@@ -33,13 +34,13 @@ export default MealItem;
 
 
 //types
-type ItemType = {
-    id: string,
-    name: string,
-    price: number,
-    description: string
-}
+// type ItemType = {
+//     id: string,
+//     name: string,
+//     price: number,
+//     description: string
+// }
 
 type PropsType = {
-    item: ItemType
+    item: MealItemType
 }
