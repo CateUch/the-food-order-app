@@ -7,9 +7,11 @@ import MealItem from './MealItem';
 function Meals() {
 
     const [listOfMeals, setListOfMeals] = useState<ListOfMealsType>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     useEffect(() => {
         const mealsAPI = async () => {
+            setIsLoading(true)
             const response = await fetch('https://the-food-order-app-a37b2-default-rtdb.firebaseio.com/meals.json');
             const responseData = await response.json();
             const mealsArray = [];
@@ -23,8 +25,8 @@ function Meals() {
                 })
             };
 
-            setListOfMeals(mealsArray)
-
+            setListOfMeals(mealsArray);
+            setIsLoading(false);
         }
         mealsAPI()
     }, [])
@@ -32,6 +34,7 @@ function Meals() {
     return (
         <>
             <MealsSummary />
+            {isLoading && <p>Loading...</p>}
             <div className={style.mealsWindow}>
                 <ul >
                     {listOfMeals.map(item => {
