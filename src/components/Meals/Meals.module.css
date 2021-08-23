@@ -16,7 +16,13 @@
     margin-top: -8rem;
 }
 
-
+.mealError {
+   text-align: center;
+    font-size: medium;
+    color:crimson;
+    font-weight: bold;
+    font-family:'Courier New', Courier, monospace;
+}
 
 .mealSection {
     display: block;
