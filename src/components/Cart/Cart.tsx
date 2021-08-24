@@ -1,9 +1,10 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import CartContext from '../../store/cart-context';
 import { ItemCtxType } from '../../store/CartContextProvider';
 import Modal from '../UI/Modal';
 import style from './Cart.module.css';
 import CartItem from './CartItem';
+import { Checkout } from './Checkout';
 
 type PropsType = {
   onClose: () => void
@@ -11,6 +12,7 @@ type PropsType = {
 
 const Cart = (props: PropsType) => {
   const context = useContext(CartContext);
+  const [isCheckout, setIsCheckout] = useState<boolean>(false)
 
   const totalAmount = `$${context.totalAmount.toFixed(2)}`;
   const hasItems = context.items.length > 0;
@@ -21,6 +23,10 @@ const Cart = (props: PropsType) => {
 
   const cartItemAddHandler = (item: ItemCtxType) => {
     context.addItem({ ...item, amount: 1 })
+  }
+
+  const orderHandler = () => {
+
   }
 
   const cartItems = (
@@ -34,11 +40,10 @@ const Cart = (props: PropsType) => {
           onRemove={cartItemRemoveHandler.bind(null, item.id)}
           onAdd={cartItemAddHandler.bind(null, item)}
         />
-        )
+      )
       )}
     </ul>
   );
-debugger
   return (
     <Modal onClose={props.onClose}>
       {cartItems}
@@ -46,11 +51,15 @@ debugger
         <span>Total Amount</span>
         <span>{totalAmount}</span>
       </div>
-      <div className={style.actions}>
+      {isCheckout && <Checkout onClose={props.onClose} /> }
+            <div className={style.actions}>
         <button className={style.buttonAlt} onClick={props.onClose}>
           Close
         </button>
-        {hasItems && <button className={style.button}>Order</button>}
+        {hasItems &&
+          <button className={style.button} onClick={orderHandler}>
+            Order
+          </button>}
       </div>
     </Modal>
   );
