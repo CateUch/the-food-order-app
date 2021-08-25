@@ -4,9 +4,10 @@
     flex-direction: column;
     border-radius: 30px;
     align-items: center;
-    margin-top: 2rem;
+    margin-top: 2rem auto;
     background-color: yellowgreen;
     min-height: 20rem;
+    max-height: fit-content;
     width: 55rem;
     margin-left: auto;
     margin-right: auto;
@@ -29,3 +30,21 @@
     border-bottom: 2px solid gray;
 
 }
+
+@media (min-width: 768px) {
+    .modal {
+      width: 40rem;
+      left: calc(50% - 20rem);
+    }
+  }
+
+  @keyframes slide-down {
+    from {
+      opacity: 0;
+      transform: translateY(-3rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
