@@ -47,7 +47,11 @@ const cartReducer = (state = defaultCart, action: ActionsType) => {
             items: updatedItems,
             totalAmount: newTotalAmout
         }
-    }
+    };
+if (action.type === 'CLEAR_CART') {
+    return defaultCart;
+}
+
     return state;
 }
 
@@ -63,12 +67,15 @@ const CartContextProvider = (props: { children: React.ReactNode }) => {
     const removeItemFromCart = (id: string) => {
         dispatchCart({ type: 'REMOVE_ITEM', id: id })
     }
+    const clearCart = () => {
+        dispatchCart({type: 'CLEAR_CART'})
+    }
     const cartContext = {
         items: cartState.items,
         totalAmount: cartState.totalAmount,
         addItem: addItemToCartHandler,
         removeItem: removeItemFromCart,
-        defaultValue: '0',
+        clearCart: clearCart
     }
 
     return (
@@ -87,7 +94,6 @@ export type ItemCtxType = {
     name: string,
     price: number,
     amount: number,
-    defaultValue: string,
 }
 
 type DefaultStateType = {
@@ -97,5 +103,6 @@ type DefaultStateType = {
 
 type AddItemActionType = { type: 'ADD_ITEM', item: ItemCtxType };
 type RemoveItemActionType = { type: 'REMOVE_ITEM', id: string };
+type ClearCartActionType = { type: 'CLEAR_CART' };
 
-type ActionsType = AddItemActionType | RemoveItemActionType
+type ActionsType = AddItemActionType | RemoveItemActionType | ClearCartActionType

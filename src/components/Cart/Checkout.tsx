@@ -1,10 +1,12 @@
 import { useRef, useState } from 'react';
+import { UserDataType } from './Cart';
 import style from './Checkout.module.css';
 
 const isEmpty = (value: string) => value.trim() === '';
 const isFiveChars = (value: string) => value.trim().length === 5;
 
 export const Checkout = (props: PropsType) => {
+
 
     const [formInputsValidity, setFormInputsValidity] = useState({
         name: true,
@@ -20,7 +22,7 @@ export const Checkout = (props: PropsType) => {
   const cityInputRef = useRef<HTMLInputElement | null>(null);
 
 const confirmHandler = (event: React.SyntheticEvent) => {
-    event.preventDefault()
+    event.preventDefault();
 
     if (nameInputRef && nameInputRef.current) {
     const enteredName = nameInputRef.current.value;
@@ -57,8 +59,20 @@ const confirmHandler = (event: React.SyntheticEvent) => {
     }
 
     // Submit cart data
-  };
+
+    props.onConfirm({
+        name:enteredName,
+        street: enteredStreet,
+        city: enteredCity,
+        postalCode: enteredPostalCode,
+    })
+
+
     }}}}
+
+
+  }
+
   const nameControlClasses = `${style.control} ${
     formInputsValidity.name ? '' : style.invalid
   }`;
@@ -74,7 +88,7 @@ const confirmHandler = (event: React.SyntheticEvent) => {
 
 
 
-return <form onSubmit={confirmHandler}>
+return <form className={style.form} onSubmit={confirmHandler}>
     <div className={nameControlClasses}>
         <label htmlFor="name">Name</label>
         <input type="text" id='name' ref={nameInputRef} />
@@ -96,17 +110,18 @@ return <form onSubmit={confirmHandler}>
         <input type="text" id='street' ref={streetInputRef} />
         {!formInputsValidity.street && <p>Please enter a valid street!</p>}
     </div>
-
+    <div className={style.actions}>
     <button type='button' onClick={props.onClose}>Cancel</button>
-    <button className={style.submit}>Confirm</button>
+    <button className={style.submit} >Confirm</button>
+    </div>
 </form>
-
-
 }
 
+
 //types
-type PropsType = {
+export type PropsType = {
     onClose: ()=>void
+    onConfirm: (data: UserDataType) => void
 }
 
 

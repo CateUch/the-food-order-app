@@ -12,6 +12,8 @@ type PropsType = {
 
 const Cart = (props: PropsType) => {
   const context = useContext(CartContext);
+  const [isSubmited, setIsSubmited] = useState(false);
+  const [didSubmit, setDidSubmit] = useState(false);
   const [isCheckout, setIsCheckout] = useState<boolean>(false)
 
   const totalAmount = `$${context.totalAmount.toFixed(2)}`;
@@ -29,6 +31,22 @@ const Cart = (props: PropsType) => {
     setIsCheckout(true)
   }
 
+  const submitOrderHandler = async (userData: UserDataType) => {
+    setIsSubmited(true);
+    await fetch('https://the-food-order-app-a37b2-default-rtdb.firebaseio.com/order.json', {
+      method: 'POST',
+      body: JSON.stringify({
+        user: userData,
+        orderedItems: context.items
+      })
+    })
+    setIsSubmited(false);
+    setDidSubmit(true);
+    context.clearCart();
+
+
+  }
+
   const cartItems = (
     <ul className={style.cartItems}>
       {context.items.map((item) => (
@@ -39,30 +57,76 @@ const Cart = (props: PropsType) => {
           amount={item.amount}
           onRemove={cartItemRemoveHandler.bind(null, item.id)}
           onAdd={cartItemAddHandler.bind(null, item)}
+
         />
       )
       )}
     </ul>
   );
-  return (
-    <Modal onClose={props.onClose}>
-      {cartItems}
-      <div className={style.total}>
-        <span>Total Amount</span>
-        <span>{totalAmount}</span>
-      </div>
-      {isCheckout && <Checkout onClose={props.onClose} /> }
-            <div className={style.actions}>
-        <button className={style.buttonAlt} onClick={props.onClose}>
+
+
+
+  const modalActions = (
+
+    <div className={style.actions}>
+      <button className={style.buttonAlt} onClick={props.onClose}>
+        Close
+      </button>
+      {hasItems && (
+        <button className={style.button} onClick={orderHandler}>
+          Order
+        </button>
+      )}
+    </div>
+  )
+
+  const submittingModalContent = <p>Sending the order...</p>
+  const successfulSubmit = (
+    <>
+      <p>Submited succssefully</p>
+      <div className={style.actions}>
+        <button className={style.button} onClick={props.onClose}>
           Close
         </button>
-        {hasItems &&
-          <button className={style.button} onClick={orderHandler}>
-            Order
-          </button>}
       </div>
+    </>
+  )
+
+  const unsuccessfulSubmit = (
+    <>
+      <p>Submited unsuccessefully</p>
+      <div className={style.actions}>
+        <button className={style.button} onClick={props.onClose}>
+          Close
+        </button>
+      </div>
+    </>
+  )
+
+  const cartModalContent = <>{cartItems}
+    <div className={style.total}>
+      <span>Total Amount</span>
+      <span>{totalAmount}</span>
+    </div>
+    {isCheckout && <Checkout onClose={props.onClose} onConfirm={submitOrderHandler} />}
+    {!isCheckout && modalActions}
+  </>
+
+  return (
+    <Modal onClose={props.onClose}>
+{!isSubmited && !didSubmit && cartModalContent}
+{isSubmited && submittingModalContent}
+{!isSubmited && didSubmit && successfulSubmit}
     </Modal>
   );
 };
 
 export default Cart;
+
+//types
+export type UserDataType = {
+  name: string,
+  street: string,
+  city: string,
+  postalCode: string,
+}
